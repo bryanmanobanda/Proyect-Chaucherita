@@ -1,7 +1,9 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 public class Movimiento implements Serializable{
@@ -14,11 +16,11 @@ public class Movimiento implements Serializable{
 	private Date fecha;
 	private double valor;
 	
+	public static List<Movimiento> movimientos = null;
 	
 	public Movimiento() {
 		
 	}
-
 
 	public Movimiento(int id, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, Date fecha, double valor) {
 		super();
@@ -29,9 +31,6 @@ public class Movimiento implements Serializable{
 		this.fecha = fecha;
 		this.valor = valor;
 	}
-	
-	
-
 
 	public int getId() {
 		return id;
@@ -86,7 +85,16 @@ public class Movimiento implements Serializable{
 		this.valor = valor;
 	}
 	
-		
+	public void agregarMovimiento(Movimiento movimiento) {
+		if(movimientos == null) {
+			movimientos = new ArrayList<Movimiento>();
+		}
+		movimientos.add(movimiento);
+	}
+	
+	public List getMovimientos () {
+		return movimientos;
+	}
 
 
 	@Override
