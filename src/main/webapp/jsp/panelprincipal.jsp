@@ -60,6 +60,6 @@
 	</table>
 
 	<a href="">Crear nueva cuenta</a>
-	<a href="">Traspasar dinero entre cuentas</a>
+	<a href="GestionarCuentaController?ruta=nuevoMovimiento">Traspasar dinero entre cuentas</a>
 </body>
 </html>

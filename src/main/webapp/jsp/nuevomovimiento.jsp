@@ -15,13 +15,21 @@
 	  <option value="saab">Saab</option>
 	  <option value="mercedes">Mercedes</option>
 	  <option value="audi">Audi</option>
+	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
+		<option>${cuenta.nombre}</option>
+	  </c:forEach>
+	  <c:forEach items="${cuentasBalance }" var="cuenta">
+		<option>${cuenta.nombre}</option>
+	  </c:forEach>
 	</select>
 	<label for="cuentaDestino">Cuenta Destino</label>
 	<select name="cuentaDestino" id="cuentaDestino">
-	  <option value="Cuenta1">Cuenta 1</option>
-	  <option value="saab">Saab</option>
-	  <option value="mercedes">Mercedes</option>
-	  <option value="audi">Audi</option>
+	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
+		<option>${cuenta.nombre}|</option>
+	  </c:forEach>
+	  <c:forEach items="${cuentasBalance }" var="cuenta">
+		<option>${cuenta.nombre}</option>
+	  </c:forEach>
 	</select>
 	<label for="monto">Agregar Monto</label>
 	<input type="text">

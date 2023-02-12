@@ -85,8 +85,15 @@ public class GestionarCuentaController extends HttpServlet {
 	}
 
 	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/jsp/nuevomovimiento.jsp").forward(request, response);
+		IngresoEgreso modeloCuenta = new IngresoEgreso();
+		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
+		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
 		
+		Balance modeloCuentaBalance = new Balance();
+		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
+		request.setAttribute("cuentasBalance", cuentasBalance);
+		
+		request.getRequestDispatcher("/jsp/nuevomovimiento.jsp").forward(request, response);
 	}
 
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
