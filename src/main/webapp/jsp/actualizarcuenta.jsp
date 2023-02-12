@@ -8,9 +8,10 @@
 </head>
 <body>
 	<form action="GestionarCuentaController?ruta=actualizarCuenta" method="post">
-		id <input type="text" name="txtId" value="${cuenta.id }" readonly="readonly"/><br>
-		Nombre <input type="text" name="txtNombreCuenta" value="${cuenta.nombre }"/> <br> 
-		Descripcion <input type="text" name="txtDescripcion" value="${cuenta.descripcion }" /><br>
+		id <input type="text" name="txtId" value="${cuenta.id}" readonly="readonly"/><br>
+		Tipo <input type="text" name="txtTipo" value="${tipo}" readonly="readonly"/><br>
+		Nombre <input type="text" name="txtNombreCuenta" value="${cuenta.nombre}"/> <br> 
+		Descripcion <input type="text" name="txtDescripcion" value="${cuenta.descripcion}" /><br>
 		<input type="submit" name="Actualizar Cuenta" />
 	</form>
 </body>

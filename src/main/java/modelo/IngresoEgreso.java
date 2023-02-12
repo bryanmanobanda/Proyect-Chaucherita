@@ -87,6 +87,15 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 			}
 		}
 	}
+	
+	public IngresoEgreso buscar(int id) {
+		for(IngresoEgreso cuenta: cuentas) {
+			if(cuenta.getId() == id) {
+				return cuenta;
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public int hashCode() {

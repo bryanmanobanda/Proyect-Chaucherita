@@ -61,6 +61,12 @@ public class GestionarCuentaController extends HttpServlet {
 		case "actualizarCuenta":
 			this.actualizarCuenta(request, response);
 			break;
+		case "eliminarCuenta":
+			this.eliminarCuenta(request, response);
+			break;
+		case "listarMovimientos":
+			this.listarMovimientos(request, response);
+			break;
 		case "nuevoMovimiento":
 			this.nuevoMovimiento(request, response);
 			break;
@@ -69,14 +75,51 @@ public class GestionarCuentaController extends HttpServlet {
 			break;
 		}
 	}
-	
-	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) {
-		
-		
+
+	private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		int idCuenta = Integer.parseInt(request.getParameter("id"));
+		int tipo = Integer.parseInt(request.getParameter("tipo"));
+		if(tipo == 0) {
+			Balance modeloCuenta = new Balance();
+			modeloCuenta.eliminarCuenta(idCuenta);
+		}else {
+			IngresoEgreso modeloCuenta = new IngresoEgreso();
+			modeloCuenta.eliminarCuenta(idCuenta);
+		}
+		this.listar(request, response);
+	}
+
+	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		int idCuenta = Integer.parseInt(request.getParameter("txtId"));
+		String nombre = request.getParameter("txtNombreCuenta");
+		String descripcion = request.getParameter("txtDescripcion");
+		String tipo = request.getParameter("txtTipo");
+		if(tipo.equals("Balance")) {
+			Balance modeloCuenta = new Balance();
+			modeloCuenta.actualizarCuenta(idCuenta, nombre, descripcion);
+		}else {
+			IngresoEgreso modeloCuenta = new IngresoEgreso();
+			modeloCuenta.actualizarCuenta(idCuenta, nombre, descripcion);
+		}
+		this.listar(request, response);
 	}
 
 	private void editarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idCuenta = Integer.parseInt(request.getParameter("id"));
+		int tipo = Integer.parseInt(request.getParameter("tipo"));
+		String nombre;
+		String descripcion;
+		if(tipo == 0) {
+			Balance modeloCuenta = new Balance();
+			Balance cuenta = modeloCuenta.buscar(idCuenta);
+			request.setAttribute("cuenta", cuenta);
+			request.setAttribute("tipo", "Balance");
+		}else {
+			IngresoEgreso modeloCuenta = new IngresoEgreso();
+			IngresoEgreso cuenta = modeloCuenta.buscar(idCuenta);
+			request.setAttribute("cuenta", cuenta);
+			request.setAttribute("tipo", "Ingreso o Egreso");
+		}
 		
 		request.getRequestDispatcher("jsp/actualizarcuenta.jsp").forward(request,response);	
 	}
@@ -115,7 +158,12 @@ public class GestionarCuentaController extends HttpServlet {
 		
 		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request,response);
 	}
-
+	
+	private void listarMovimientos(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

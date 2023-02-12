@@ -32,7 +32,7 @@
 				<td>${cuenta.id}</td>
 				<td>${cuenta.nombre}</td>
 				<td>${cuenta.descripcion}</td>
-				<td><a href="GestionarCuentaController?ruta=actualizar&id=${cuenta.id}">Actualizar</a> | <a href="GestionarCuentaController?ruta=eliminar&id=${cuenta.id}">Eliminar</a></td>
+				<td><a href="GestionarCuentaController?ruta=editarCuenta&id=${cuenta.id}&tipo=1">Actualizar</a> | <a href="GestionarCuentaController?ruta=eliminarCuenta&id=${cuenta.id}&tipo=1">Eliminar</a></td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -54,12 +54,14 @@
 				<td>${cuenta.nombre}</td>
 				<td>${cuenta.descripcion}</td>
 				<td>${cuenta.monto}</td>
-				<td><a href="GestionarCuentaController?ruta=actualizar&id=${cuenta.id}">Actualizar</a> | <a href="GestionarCuentaController?ruta=eliminar&id=${cuenta.id}">Eliminar</a></td>
+				<td><a href="GestionarCuentaController?ruta=editarCuenta&id=${cuenta.id}&tipo=0">Actualizar</a> | <a href="GestionarCuentaController?ruta=eliminarCuenta&id=${cuenta.id}&tipo=0">Eliminar</a></td>
 			</tr>
 		</c:forEach>
 	</table>
-	<p>${tipoCuenta}</p>
-	<a href="">Crear nueva cuenta</a>
-	<a href="GestionarCuentaController?ruta=nuevoMovimiento">Traspasar dinero entre cuentas</a>
+	<h1>Movimientos</h1>
+	<p><a href="GestionarCuentaController?ruta=nuevoMovimiento">Mover dinero entre cuentas</a></p><br>
+	<p><a href="GestionarCuentaController?ruta=listarMovimientos">Ver movimientos</a></p>
+	
+	
 </body>
 </html>

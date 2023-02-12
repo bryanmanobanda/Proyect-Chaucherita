@@ -67,6 +67,16 @@ public class Balance extends Cuenta implements Serializable{
 		return cuentas;
 	}
 
+	public Balance buscar(int id) {
+		for(Balance cuenta: cuentas) {
+			if(cuenta.getId() == id) {
+				return cuenta;
+			}
+		}
+		return null;
+	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
