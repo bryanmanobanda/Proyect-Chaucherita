@@ -43,7 +43,6 @@ public class GestionarCuentaController extends HttpServlet {
 		try {
 			procesar(request, response);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
