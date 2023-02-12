@@ -31,6 +31,10 @@ public class Movimiento implements Serializable{
 		this.fecha = fecha;
 		this.valor = valor;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
@@ -94,6 +98,17 @@ public class Movimiento implements Serializable{
 	
 	public List getMovimientos () {
 		return movimientos;
+	}
+	
+	public void crearCuenta(Movimiento movimiento) {
+		int max = 0;
+		for (Movimiento c : movimientos) {
+			if(max < c.getId()) {
+				max = c.getId();
+			}
+		}
+		movimiento.setId(max + 1);
+		movimientos.add(movimiento);
 	}
 
 
