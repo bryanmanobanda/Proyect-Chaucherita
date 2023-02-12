@@ -1,7 +1,7 @@
 package modelo;
 
 public abstract class Cuenta {
-	protected String id;
+	protected int id;
 	protected String nombre;
 	protected String descripcion;
 
@@ -9,18 +9,18 @@ public abstract class Cuenta {
 
 	}
 	
-	public Cuenta(String id, String nombre, String descripcion) {
+	public Cuenta(int id, String nombre, String descripcion) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

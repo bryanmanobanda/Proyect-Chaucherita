@@ -19,7 +19,7 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 	public IngresoEgreso() {
 	}
 
-	public IngresoEgreso(boolean tipoCuenta, String id, String nombre, String descripcion) {
+	public IngresoEgreso(boolean tipoCuenta, int id, String nombre, String descripcion) {
 		super(id, nombre, descripcion);
 		this.tipoCuenta = tipoCuenta;
 	}
@@ -35,9 +35,9 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 	public List<IngresoEgreso> getCuentas() {
 		if(cuentas == null) {
 			cuentas = new ArrayList<IngresoEgreso>();
-			cuentas.add(new IngresoEgreso(false, "IE0", "Universidad", "Policuenta"));
-			cuentas.add(new IngresoEgreso(true, "IE1", "Nómina", "Laburando"));
-			cuentas.add(new IngresoEgreso(false, "IE2", "Regalos", "Gastando plata"));
+			cuentas.add(new IngresoEgreso(false, 0, "Universidad", "Policuenta"));
+			cuentas.add(new IngresoEgreso(true, 1, "Nómina", "Laburando"));
+			cuentas.add(new IngresoEgreso(false, 2, "Regalos", "Gastando plata"));
 		}
 		return cuentas;
 	}
@@ -67,21 +67,27 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 			}
 		}
 		cuenta.setId("IE" + (max + 1));*/
-		//cuenta.setId("IE20");
+		for(IngresoEgreso c : cuentas) {
+			if(max < c.getId()) {
+				max = c.getId();
+			}
+		}
+		
+		cuenta.setId(max + 1);
 		cuentas.add(cuenta);
 	}
 
-	public void eliminarCuenta(String id) {
+	public void eliminarCuenta(int id) {
 		for (int i = 0; i < cuentas.size(); i++) {
-			if (id.equals(cuentas.get(i).getId())) {
+			if (id == (cuentas.get(i).getId())) {
 				cuentas.remove(i);
 			}
 		}
 	}
 
-	public void actualizarCuenta(String id, String nombre, String descripcion) {
+	public void actualizarCuenta(int id, String nombre, String descripcion) {
 		for (int i = 0; i < cuentas.size(); i++) {
-			if(id.equals(cuentas.get(i).getId())) {
+			if(id == (cuentas.get(i).getId())) {
 				cuentas.get(i).setNombre(nombre);
 				cuentas.get(i).setDescripcion(descripcion);
 			}

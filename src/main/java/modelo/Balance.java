@@ -15,7 +15,7 @@ public class Balance extends Cuenta implements Serializable{
 	public Balance() {}
 	
 
-	public Balance(double monto, String id, String nombre, String descripcion) {
+	public Balance(double monto, int id, String nombre, String descripcion) {
 		super(id, nombre,descripcion);
 		this.monto = monto;
 	}
@@ -31,25 +31,28 @@ public class Balance extends Cuenta implements Serializable{
 	public void crearCuenta(Balance cuenta) {
 		int max = 0;
 		for (Balance c : cuentas) {
-			if (max < Integer.parseInt(c.getId().substring(1))) {
+			/*if (max < Integer.parseInt(c.getId().substring(1))) {
 				max = Integer.parseInt(c.getId().substring(1));
+			}*/
+			if(max < c.getId()) {
+				max = c.getId();
 			}
 		}
-		cuenta.setId("IE" + (max + 1));
+		cuenta.setId(max + 1);
 		cuentas.add(cuenta);
 	}
 
-	public void eliminarCuenta(String id) {
+	public void eliminarCuenta(int id) {
 		for (int i = 0; i < cuentas.size(); i++) {
-			if (id.equals(cuentas.get(i).getId())) {
+			if (id ==(cuentas.get(i).getId())) {
 				cuentas.remove(i);
 			}
 		}
 	}
 
-	public void actualizarCuenta(String id, String nombre, String descripcion) {
+	public void actualizarCuenta(int id, String nombre, String descripcion) {
 		for (int i = 0; i < cuentas.size(); i++) {
-			if(id.equals(cuentas.get(i).getId())) {
+			if(id == (cuentas.get(i).getId())) {
 				cuentas.get(i).setNombre(nombre);
 				cuentas.get(i).setDescripcion(descripcion);
 			}
@@ -59,7 +62,7 @@ public class Balance extends Cuenta implements Serializable{
 	public List<Balance> getCuentas() {
 		if(cuentas == null) {
 			cuentas = new ArrayList<Balance>();
-			cuentas.add(new Balance(0, "B0", "Banco", "Ta grave la situación"));
+			cuentas.add(new Balance(0, 10, "Banco", "Ta grave la situación"));
 		}
 		return cuentas;
 	}
