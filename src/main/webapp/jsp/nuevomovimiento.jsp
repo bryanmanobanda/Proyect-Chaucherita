@@ -11,17 +11,13 @@
 	<h1>Traspasar dinero entre cuentas</h1>
 	<label for="cuentaOrigen">Cuenta origen</label>
 	<select name="cuentaOrigen" id="cuentaOrigen">
-	  <option value="Cuenta1">Cuenta 1</option>
-	  <option value="saab">Saab</option>
-	  <option value="mercedes">Mercedes</option>
-	  <option value="audi">Audi</option>
 	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
 		<option>${cuenta.nombre}</option>
 	  </c:forEach>
 	  <c:forEach items="${cuentasBalance }" var="cuenta">
 		<option>${cuenta.nombre}</option>
 	  </c:forEach>
-	</select>
+	</select><br>
 	<label for="cuentaDestino">Cuenta Destino</label>
 	<select name="cuentaDestino" id="cuentaDestino">
 	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
@@ -30,8 +26,8 @@
 	  <c:forEach items="${cuentasBalance }" var="cuenta">
 		<option>${cuenta.nombre}</option>
 	  </c:forEach>
-	</select>
-	<label for="monto">Agregar Monto</label>
+	</select><br>
+	<label for="monto">Agregar Monto</label><br>
 	<input type="text">
 	
 </body>

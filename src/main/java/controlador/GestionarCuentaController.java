@@ -55,6 +55,12 @@ public class GestionarCuentaController extends HttpServlet {
 		case "listar":
 			this.listar(request, response);
 			break;
+		case "nuevaCuenta":
+			this.nuevaCuenta(request, response);
+			break;
+		case "guardarCuenta":
+			this.guardarCuenta(request, response);
+			break;
 		case "nuevoMovimiento":
 			this.nuevoMovimiento(request, response);
 			break;
@@ -79,8 +85,29 @@ public class GestionarCuentaController extends HttpServlet {
 		}
 	}
 	
-	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int tipoCuenta = Integer.parseInt(request.getParameter("tipoCuenta"));
+		String nombre = request.getParameter("txtNombreCuenta");
+		String descripcion = request.getParameter("txtDescripcion");
+		if (tipoCuenta == 0) {
+			Balance cuenta = new Balance(0, "B02", nombre, descripcion );
+			Balance modeloCuenta = new Balance();
+			modeloCuenta.crearCuenta(cuenta);
+		}else {
+			IngresoEgreso cuenta = new IngresoEgreso(false, "IE05", nombre, descripcion);
+			IngresoEgreso modeloCuenta = new IngresoEgreso();
+			modeloCuenta.crearCuenta(cuenta);
+		}
+		request.getRequestDispatcher("/jsp/panelprincipal.jsp").forward(request, response);
+		
+	}
+
+	private void nuevaCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		request.getRequestDispatcher("jsp/crearcuenta.jsp").forward(request,response);
+	}
+
+	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
 

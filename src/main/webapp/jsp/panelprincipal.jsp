@@ -16,7 +16,7 @@
 	<div>Balance</div>
 	
 	
-	<a href="GestionarCuentaController?ruta=nuevo">Nueva Cuenta</a>
+	<a href="GestionarCuentaController?ruta=nuevaCuenta">Nueva Cuenta</a>
 	<h1>Listado de cuentas Ingreso o Egreso</h1>
 	<table>
 		<thead>
@@ -58,7 +58,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-
+	<p>${tipoCuenta}</p>
 	<a href="">Crear nueva cuenta</a>
 	<a href="GestionarCuentaController?ruta=nuevoMovimiento">Traspasar dinero entre cuentas</a>
 </body>
