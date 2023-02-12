@@ -85,22 +85,22 @@ public class GestionarCuentaController extends HttpServlet {
 		}
 	}
 	
-	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		int tipoCuenta = Integer.parseInt(request.getParameter("tipoCuenta"));
 		String nombre = request.getParameter("txtNombreCuenta");
 		String descripcion = request.getParameter("txtDescripcion");
 		if (tipoCuenta == 0) {
-			Balance cuenta = new Balance(0, "B02", nombre, descripcion );
+			Balance cuenta = new Balance(0, 11, nombre, descripcion );
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.crearCuenta(cuenta);
 		}else {
-			IngresoEgreso cuenta = new IngresoEgreso(false, "IE05", nombre, descripcion);
+			IngresoEgreso cuenta = new IngresoEgreso(false, 7, nombre, descripcion);
 			IngresoEgreso modeloCuenta = new IngresoEgreso();
 			modeloCuenta.crearCuenta(cuenta);
 		}
 		
-		
-		request.getRequestDispatcher("/jsp/panelprincipal.jsp").forward(request, response);
+		//request.getRequestDispatcher("/jsp/panelprincipal.jsp").forward(request, response);
+		this.listar(request, response);
 		
 	}
 
