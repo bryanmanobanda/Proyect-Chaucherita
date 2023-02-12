@@ -2,12 +2,17 @@ package controlador;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import modelo.Balance;
+import modelo.Cuenta;
+import modelo.IngresoEgreso;
 
 /**
  * Servlet implementation class GestionarCuentaController
@@ -50,6 +55,12 @@ public class GestionarCuentaController extends HttpServlet {
 		case "listar":
 			this.listar(request, response);
 			break;
+		case "nuevoMovimiento":
+			this.nuevoMovimiento(request, response);
+			break;
+		case "guardarMovimiento":
+			this.guardarMovimiento(request, response);
+			break;
 		/*case "nuevo":
 			this.nuevo(request, response);
 			break;
@@ -68,8 +79,26 @@ public class GestionarCuentaController extends HttpServlet {
 		}
 	}
 	
+	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher("/jsp/nuevomovimiento.jsp").forward(request, response);
+		
+	}
+
 	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		request.getRequestDispatcher("jsp/PanelPrincipal.jsp").forward(request,response);
+		IngresoEgreso modeloCuenta = new IngresoEgreso();
+		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
+		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
+		
+		Balance modeloCuentaBalance = new Balance();
+		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
+		request.setAttribute("cuentasBalance", cuentasBalance);
+		
+		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request,response);
 	}
 
 }
