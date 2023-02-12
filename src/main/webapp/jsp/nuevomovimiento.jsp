@@ -9,26 +9,30 @@
 </head>
 <body>
 	<h1>Traspasar dinero entre cuentas</h1>
-	<label for="cuentaOrigen">Cuenta origen</label>
-	<select name="cuentaOrigen" id="cuentaOrigen">
-	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
-		<option>${cuenta.nombre}</option>
-	  </c:forEach>
-	  <c:forEach items="${cuentasBalance }" var="cuenta">
-		<option>${cuenta.nombre}</option>
-	  </c:forEach>
-	</select><br>
-	<label for="cuentaDestino">Cuenta Destino</label>
-	<select name="cuentaDestino" id="cuentaDestino">
-	  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
-		<option>${cuenta.nombre}|</option>
-	  </c:forEach>
-	  <c:forEach items="${cuentasBalance }" var="cuenta">
-		<option>${cuenta.nombre}</option>
-	  </c:forEach>
-	</select><br>
-	<label for="monto">Agregar Monto</label><br>
-	<input type="text">
+	<form action="GestionarMovimientoController?ruta=guardarMovimiento">
+		<label for="cuentaOrigen">Cuenta origen</label>
+		<select name="cuentaOrigen" id="cuentaOrigen">
+		  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
+			<option>${cuenta.nombre}</option>
+		  </c:forEach>
+		  <c:forEach items="${cuentasBalance }" var="cuenta">
+			<option>${cuenta.nombre}</option>
+		  </c:forEach>
+		</select><br>
+		<label for="cuentaDestino">Cuenta Destino</label>
+		<select name="cuentaDestino" id="cuentaDestino">
+		  <c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
+			<option>${cuenta.nombre}</option>
+		  </c:forEach>
+		  <c:forEach items="${cuentasBalance }" var="cuenta">
+			<option>${cuenta.nombre}</option>
+		  </c:forEach>
+		</select><br>
+		<label for="monto">Agregar Monto</label>
+		<input type="text">
+		<input type="submit" value="Realizar Movimiento"/>
+	</form>
+	
 	
 </body>
 </html>

@@ -59,8 +59,8 @@
 		</c:forEach>
 	</table>
 	<h1>Movimientos</h1>
-	<p><a href="GestionarCuentaController?ruta=nuevoMovimiento">Mover dinero entre cuentas</a></p><br>
-	<p><a href="GestionarCuentaController?ruta=listarMovimientos">Ver movimientos</a></p>
+	<p><a href="GestionarMovimientoController?ruta=nuevoMovimiento">Mover dinero entre cuentas</a></p><br>
+	<p><a href="GestionarMovimientoController?ruta=listarMovimientos">Ver movimientos</a></p>
 	
 	
 </body>

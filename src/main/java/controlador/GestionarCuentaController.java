@@ -20,13 +20,14 @@ import modelo.IngresoEgreso;
 @WebServlet("/GestionarCuentaController")
 public class GestionarCuentaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public GestionarCuentaController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public GestionarCuentaController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			procesar(request, response);
 		} catch (Exception e) {
@@ -35,17 +36,18 @@ public class GestionarCuentaController extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
 			procesar(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	private void procesar(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String ruta = (request.getParameter("ruta") == null ? "listar":request.getParameter("ruta"));
-		switch(ruta) {
+
+	private void procesar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String ruta = (request.getParameter("ruta") == null ? "listar" : request.getParameter("ruta"));
+		switch (ruta) {
 		case "listar":
 			this.listar(request, response);
 			break;
@@ -64,122 +66,96 @@ public class GestionarCuentaController extends HttpServlet {
 		case "eliminarCuenta":
 			this.eliminarCuenta(request, response);
 			break;
-		case "listarMovimientos":
-			this.listarMovimientos(request, response);
-			break;
-		case "nuevoMovimiento":
-			this.nuevoMovimiento(request, response);
-			break;
-		case "guardarMovimiento":
-			this.guardarMovimiento(request, response);
-			break;
 		}
 	}
 
-	private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	private void eliminarCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 		int idCuenta = Integer.parseInt(request.getParameter("id"));
 		int tipo = Integer.parseInt(request.getParameter("tipo"));
-		if(tipo == 0) {
+		if (tipo == 0) {
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.eliminarCuenta(idCuenta);
-		}else {
+		} else {
 			IngresoEgreso modeloCuenta = new IngresoEgreso();
 			modeloCuenta.eliminarCuenta(idCuenta);
 		}
 		this.listar(request, response);
 	}
 
-	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 		int idCuenta = Integer.parseInt(request.getParameter("txtId"));
 		String nombre = request.getParameter("txtNombreCuenta");
 		String descripcion = request.getParameter("txtDescripcion");
 		String tipo = request.getParameter("txtTipo");
-		if(tipo.equals("Balance")) {
+		if (tipo.equals("Balance")) {
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.actualizarCuenta(idCuenta, nombre, descripcion);
-		}else {
+		} else {
 			IngresoEgreso modeloCuenta = new IngresoEgreso();
 			modeloCuenta.actualizarCuenta(idCuenta, nombre, descripcion);
 		}
 		this.listar(request, response);
 	}
 
-	private void editarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void editarCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int idCuenta = Integer.parseInt(request.getParameter("id"));
 		int tipo = Integer.parseInt(request.getParameter("tipo"));
 		String nombre;
 		String descripcion;
-		if(tipo == 0) {
+		if (tipo == 0) {
 			Balance modeloCuenta = new Balance();
 			Balance cuenta = modeloCuenta.buscar(idCuenta);
 			request.setAttribute("cuenta", cuenta);
 			request.setAttribute("tipo", "Balance");
-		}else {
+		} else {
 			IngresoEgreso modeloCuenta = new IngresoEgreso();
 			IngresoEgreso cuenta = modeloCuenta.buscar(idCuenta);
 			request.setAttribute("cuenta", cuenta);
 			request.setAttribute("tipo", "Ingreso o Egreso");
 		}
-		
-		request.getRequestDispatcher("jsp/actualizarcuenta.jsp").forward(request,response);	
+
+		request.getRequestDispatcher("jsp/actualizarcuenta.jsp").forward(request, response);
 	}
 
-	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 		int tipoCuenta = Integer.parseInt(request.getParameter("tipoCuenta"));
 		String nombre = request.getParameter("txtNombreCuenta");
 		String descripcion = request.getParameter("txtDescripcion");
 		if (tipoCuenta == 0) {
-			Balance cuenta = new Balance(0, 11, nombre, descripcion );
+			Balance cuenta = new Balance(0, 11, nombre, descripcion);
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.crearCuenta(cuenta);
-		}else {
+		} else {
 			IngresoEgreso cuenta = new IngresoEgreso(false, 7, nombre, descripcion);
 			IngresoEgreso modeloCuenta = new IngresoEgreso();
 			modeloCuenta.crearCuenta(cuenta);
 		}
-		
+
 		this.listar(request, response);
-		
+
 	}
 
-	private void nuevaCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("jsp/crearcuenta.jsp").forward(request,response);
+	private void nuevaCuenta(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.getRequestDispatcher("jsp/crearcuenta.jsp").forward(request, response);
 	}
-	
-	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+
+	private void listar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, SQLException {
 		IngresoEgreso modeloCuenta = new IngresoEgreso();
 		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
 		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
-		
+
 		Balance modeloCuentaBalance = new Balance();
 		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
 		request.setAttribute("cuentasBalance", cuentasBalance);
-		
-		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request,response);
-	}
-	
-	private void listarMovimientos(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
 
-	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IngresoEgreso modeloCuenta = new IngresoEgreso();
-		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
-		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
-		
-		Balance modeloCuentaBalance = new Balance();
-		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
-		request.setAttribute("cuentasBalance", cuentasBalance);
-		
-		request.getRequestDispatcher("/jsp/nuevomovimiento.jsp").forward(request, response);
+		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request, response);
 	}
-
-	
 
 }

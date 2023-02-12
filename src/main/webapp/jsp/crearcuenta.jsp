@@ -16,7 +16,7 @@
 		id <input type="hidden" name="txtId" /> <br>
 		Nombre <input type="text" name="txtNombreCuenta" /> <br> 
 		Descripcion <input type="text" name="txtDescripcion" /><br>
-		<input type="submit" name="Crear cuenta" />
+		<input type="submit" value="Crear Cuenta"/>
 	</form>
 </body>
 </html>
