@@ -21,17 +21,11 @@ import modelo.IngresoEgreso;
 public class GestionarCuentaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public GestionarCuentaController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			procesar(request, response);
@@ -61,30 +55,32 @@ public class GestionarCuentaController extends HttpServlet {
 		case "guardarCuenta":
 			this.guardarCuenta(request, response);
 			break;
+		case "editarCuenta":
+			this.editarCuenta(request, response);
+			break;
+		case "actualizarCuenta":
+			this.actualizarCuenta(request, response);
+			break;
 		case "nuevoMovimiento":
 			this.nuevoMovimiento(request, response);
 			break;
 		case "guardarMovimiento":
 			this.guardarMovimiento(request, response);
 			break;
-		/*case "nuevo":
-			this.nuevo(request, response);
-			break;
-		case "guardar":
-			this.guardar(request, response);
-			break;
-		case "eliminar":
-			this.eliminar(request, response);
-			break;
-		case "actualizar":
-			this.actualizar(request, response);
-			break;
-		case "guardarA":
-			this.actualizarDato(request, response);
-			break;*/
 		}
 	}
 	
+	private void actualizarCuenta(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+	}
+
+	private void editarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int idCuenta = Integer.parseInt(request.getParameter("id"));
+		
+		request.getRequestDispatcher("jsp/actualizarcuenta.jsp").forward(request,response);	
+	}
+
 	private void guardarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		int tipoCuenta = Integer.parseInt(request.getParameter("tipoCuenta"));
 		String nombre = request.getParameter("txtNombreCuenta");
@@ -99,7 +95,6 @@ public class GestionarCuentaController extends HttpServlet {
 			modeloCuenta.crearCuenta(cuenta);
 		}
 		
-		//request.getRequestDispatcher("/jsp/panelprincipal.jsp").forward(request, response);
 		this.listar(request, response);
 		
 	}
@@ -107,6 +102,18 @@ public class GestionarCuentaController extends HttpServlet {
 	private void nuevaCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.getRequestDispatcher("jsp/crearcuenta.jsp").forward(request,response);
+	}
+	
+	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		IngresoEgreso modeloCuenta = new IngresoEgreso();
+		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
+		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
+		
+		Balance modeloCuentaBalance = new Balance();
+		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
+		request.setAttribute("cuentasBalance", cuentasBalance);
+		
+		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request,response);
 	}
 
 	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -125,16 +132,6 @@ public class GestionarCuentaController extends HttpServlet {
 		request.getRequestDispatcher("/jsp/nuevomovimiento.jsp").forward(request, response);
 	}
 
-	private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		IngresoEgreso modeloCuenta = new IngresoEgreso();
-		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
-		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
-		
-		Balance modeloCuentaBalance = new Balance();
-		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();
-		request.setAttribute("cuentasBalance", cuentasBalance);
-		
-		request.getRequestDispatcher("jsp/panelprincipal.jsp").forward(request,response);
-	}
+	
 
 }

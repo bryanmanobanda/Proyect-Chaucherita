@@ -61,12 +61,6 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 
 	public void crearCuenta(IngresoEgreso cuenta) {
 		int max = 0;
-		/*for (IngresoEgreso c : cuentas) {
-			if (max < Integer.parseInt(c.getId().substring(2))) {
-				max = Integer.parseInt(c.getId().substring(2));
-			}
-		}
-		cuenta.setId("IE" + (max + 1));*/
 		for(IngresoEgreso c : cuentas) {
 			if(max < c.getId()) {
 				max = c.getId();
