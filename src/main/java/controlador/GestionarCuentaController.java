@@ -99,6 +99,7 @@ public class GestionarCuentaController extends HttpServlet {
 			modeloCuenta.crearCuenta(cuenta);
 		}
 		
+		
 		request.getRequestDispatcher("/jsp/panelprincipal.jsp").forward(request, response);
 		
 	}
