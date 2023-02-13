@@ -10,21 +10,25 @@
 <body>
 	<h1>Traspasar dinero entre cuentas</h1>
 	<form action="GestionarMovimientoController?ruta=guardarMovimiento">
-		<input type="radio" id="Balance" name="tipoCuenta" value="0"
-			onclick="llenar1();" required> <label for="Balance">Balance</label><br>
-		<input type="radio" id="IngresoEgreso" name="tipoCuenta" value="1"
-			onclick="llenar2();" required> <label for="IngresoEgreso">Ingreso
-			o Egreso</label><br> <label for="cuentaOrigen">Cuenta origen</label> <select
-			name="cuentaOrigen" id="cuentaOrigen">
+		<input type="radio" id="BalanceOrigen" name="tipoCuentaOrigen" value="0"
+			onclick="llenar1(0);" required> 
+			<label for="BalanceOrigen">Balance</label><br>
+		<input type="radio" id="IngresoEgresoOrigen" name="tipoCuentaOrigen" value="1"
+			onclick="llenar2(0);" required>
+			 <label for="IngresoEgresoOrigen">Ingreso o Egreso</label><br> 
+			 <label for="cuentaOrigen">Cuenta origen</label>
+			 <select name="cuentaOrigen" id="cuentaOrigen">
 
-		</select><br> <label for="cuentaDestino">Cuenta Destino</label> <select
-			name="cuentaDestino" id="cuentaDestino">
-			<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">
-				<option>${cuenta.nombre}</option>
-			</c:forEach>
-			<c:forEach items="${cuentasBalance }" var="cuenta">
-				<option>${cuenta.nombre}</option>
-			</c:forEach>
+		</select><br> 
+		<input type="radio" id="BalanceDestino" name="tipoCuentaDestino" value="0"
+			onclick="llenar1(1);" required> 
+			<label for="BalanceDestino">Balance</label><br>
+		<input type="radio" id="IngresoEgresoDestino" name="tipoCuentaDestino" value="1"
+			onclick="llenar2(1);" required>
+			<label for="IngresoEgresoDestino">Ingreso o Egreso</label><br> 
+			 <label for="cuentaDestino">Cuenta Destino</label>
+		<select	name="cuentaDestino" id="cuentaDestino">
+			
 		</select><br> <label for="monto">Agregar Monto</label> <input type="text">
 		<input type="submit" value="Realizar Movimiento" />
 	</form>
@@ -32,17 +36,35 @@
 
 </body>
 <script>
-	function llenar1() {
-		var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
-		html += '<option>${cuenta.nombre}</option>';
-		html += '</c:forEach>';
-		document.getElementById("cuentaOrigen").innerHTML = html;
+	function llenar1(tipo) {
+		if(tipo == 0){
+			var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
+			html += '<option>${cuenta.nombre}</option>';
+			html += '</c:forEach>';
+			document.getElementById("cuentaOrigen").innerHTML = html;
+		}
+		if(tipo == 1){
+			var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
+			html += '<option>${cuenta.nombre}</option>';
+			html += '</c:forEach>';
+			document.getElementById("cuentaDestino").innerHTML = html;
+		}
+		
 	}
-	function llenar2() {
-		var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
-		html += '<option>${cuenta.nombre}</option>';
-		html += '</c:forEach>';
-		document.getElementById("cuentaOrigen").innerHTML = html;
+	function llenar2(tipo) {
+		if(tipo == 0){
+			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
+			html += '<option>${cuenta.nombre}</option>';
+			html += '</c:forEach>';
+			document.getElementById("cuentaOrigen").innerHTML = html;
+		}
+		if(tipo == 1){
+			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
+			html += '<option>${cuenta.nombre}</option>';
+			html += '</c:forEach>';
+			document.getElementById("cuentaDestino").innerHTML = html;
+		}
+		
 	}
 </script>
 </html>
