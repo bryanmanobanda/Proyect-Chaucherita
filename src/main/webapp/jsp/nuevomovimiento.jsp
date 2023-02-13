@@ -15,7 +15,7 @@
 			<label for="BalanceOrigen">Balance</label><br>
 		<input type="radio" id="IngresoOrigen" name="tipoCuentaOrigen" value="1"
 			onclick="llenar2(0);" required>
-			 <label for="IngresoOrigen">Ingreso o Egreso</label><br> 
+			 <label for="IngresoOrigen">Ingreso</label><br> 
 			 <label for="cuentaOrigen">Cuenta origen</label>
 			 <select name="cuentaOrigen" id="cuentaOrigen">
 
@@ -25,7 +25,7 @@
 			<label for="BalanceDestino">Balance</label><br>
 		<input type="radio" id="EgresoDestino" name="tipoCuentaDestino" value="1"
 			onclick="llenar2(1);" required>
-			<label for="EgresoDestino">Ingreso o Egreso</label><br> 
+			<label for="EgresoDestino">Egreso</label><br> 
 			 <label for="cuentaDestino">Cuenta Destino</label>
 		<select	name="cuentaDestino" id="cuentaDestino"></select><br> 
 		Agregar Monto<input type="text" name="txtMonto"><br>
