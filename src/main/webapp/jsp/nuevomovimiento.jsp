@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Traspasar dinero entre cuentas</h1>
-	<form action="GestionarMovimientoController?ruta=guardarMovimiento">
+	<form action="GestionarMovimientoController?ruta=guardarMovimiento" method="post">
 		<input type="radio" id="BalanceOrigen" name="tipoCuentaOrigen" value="0"
 			onclick="llenar1(0);" required> 
 			<label for="BalanceOrigen">Balance</label><br>

@@ -104,6 +104,7 @@ public class GestionarMovimientoController extends HttpServlet {
 		Movimiento modeloMovimiento = new Movimiento();
 		Movimiento movimiento = new Movimiento(0, cuentaOrigen, cuentaDestino, concepto, fecha, monto);
 		modeloMovimiento.crearMovimiento(movimiento);
+		this.listarMovimientos(request, response);
 	}
 
 	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -96,19 +96,22 @@ public class Movimiento implements Serializable{
 		movimientos.add(movimiento);
 	}
 	
-	public List getMovimientos () {
-		return movimientos;
+	public List<Movimiento> getMovimientos () {
+		return this.movimientos;
 	}
 	
 	public void crearMovimiento(Movimiento movimiento) {
+		if(this.movimientos == null) {
+			this.movimientos = new ArrayList<Movimiento>();
+		}
 		int max = 0;
-		for (Movimiento c : movimientos) {
+		for (Movimiento c : this.movimientos) {
 			if(max < c.getId()) {
 				max = c.getId();
 			}
 		}
 		movimiento.setId(max + 1);
-		movimientos.add(movimiento);
+		this.movimientos.add(movimiento);
 	}
 
 
