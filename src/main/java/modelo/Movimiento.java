@@ -1,28 +1,30 @@
 package modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class Movimiento implements Serializable{
+public class Movimiento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private Cuenta cuentaOrigen;
 	private Cuenta cuentaDestino;
 	private String concepto;
-	private Date fecha;
+	private LocalDate fecha;
 	private double valor;
-	
+
 	public static List<Movimiento> movimientos = null;
-	
+
 	public Movimiento() {
-		
+
 	}
 
-	public Movimiento(int id, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, Date fecha, double valor) {
+	public Movimiento(int id, Cuenta cuentaOrigen, Cuenta cuentaDestino, String concepto, LocalDate fecha, double valor) {
 		super();
 		this.id = id;
 		this.cuentaOrigen = cuentaOrigen;
@@ -31,7 +33,7 @@ public class Movimiento implements Serializable{
 		this.fecha = fecha;
 		this.valor = valor;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -44,69 +46,60 @@ public class Movimiento implements Serializable{
 		return cuentaOrigen;
 	}
 
-
 	public void setCuentaOrigen(Cuenta cuentaOrigen) {
 		this.cuentaOrigen = cuentaOrigen;
 	}
-
 
 	public Cuenta getCuentaDestino() {
 		return cuentaDestino;
 	}
 
-
 	public void setCuentaDestino(Cuenta cuentaDestino) {
 		this.cuentaDestino = cuentaDestino;
 	}
-
 
 	public String getConcepto() {
 		return concepto;
 	}
 
-
 	public void setConcepto(String concepto) {
 		this.concepto = concepto;
 	}
 
-
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-
 
 	public double getValor() {
 		return valor;
 	}
 
-
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
 	public void agregarMovimiento(Movimiento movimiento) {
-		if(movimientos == null) {
+		if (movimientos == null) {
 			movimientos = new ArrayList<Movimiento>();
 		}
 		movimientos.add(movimiento);
 	}
-	
-	public List<Movimiento> getMovimientos () {
+
+	public List<Movimiento> getMovimientos() {
 		return this.movimientos;
 	}
-	
+
 	public void crearMovimiento(Movimiento movimiento) {
-		if(this.movimientos == null) {
+		if (this.movimientos == null) {
 			this.movimientos = new ArrayList<Movimiento>();
 		}
 		int max = 0;
 		for (Movimiento c : this.movimientos) {
-			if(max < c.getId()) {
+			if (max < c.getId()) {
 				max = c.getId();
 			}
 		}
@@ -114,12 +107,26 @@ public class Movimiento implements Serializable{
 		this.movimientos.add(movimiento);
 	}
 
+	public List<Movimiento> rangoFechas(String fechaIn, String fechaFn) {
+		List<Movimiento> movimientosEnRango = new ArrayList<Movimiento>();
+		//DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate fechaInicio = LocalDate.parse(fechaIn);
+		LocalDate fechaFin = LocalDate.parse(fechaFn);
+		for (Movimiento m : movimientos) {
+			LocalDate fecha = LocalDate.parse(m.getFecha().toString());
+			if ((fecha.isBefore(fechaFin) || fecha.equals(fechaFin))
+					&& (fecha.isAfter(fechaInicio) || fecha.equals(fechaInicio))) {
+				movimientosEnRango.add(m);
+			}
+		}
+		System.out.println(movimientos.toString());
+		return movimientosEnRango;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(concepto, cuentaDestino, cuentaOrigen, fecha, id, valor);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -135,11 +142,10 @@ public class Movimiento implements Serializable{
 				&& id == other.id && Double.doubleToLongBits(valor) == Double.doubleToLongBits(other.valor);
 	}
 
-
 	@Override
 	public String toString() {
 		return "Movimiento [id=" + id + ", cuentaOrigen=" + cuentaOrigen + ", cuentaDestino=" + cuentaDestino
 				+ ", concepto=" + concepto + ", fecha=" + fecha + ", valor=" + valor + "]";
 	}
-	
+
 }

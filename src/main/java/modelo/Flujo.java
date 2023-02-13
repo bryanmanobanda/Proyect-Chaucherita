@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Flujo implements Serializable{
@@ -10,12 +11,12 @@ public class Flujo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private double monto;
-	private Date fecha;
+	private LocalDate fecha;
 	
 	public Flujo(){}
 	
 	
-	public Flujo(int id, double monto, Date fecha) {
+	public Flujo(int id, double monto, LocalDate fecha) {
 		super();
 		this.id = id;
 		this.monto = monto;
@@ -34,10 +35,10 @@ public class Flujo implements Serializable{
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

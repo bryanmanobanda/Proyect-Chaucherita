@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,9 +86,9 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 	public List<Flujo> getFlujos() {
 		if (this.flujo == null) {
 			this.flujo = new ArrayList<Flujo>();
-			this.flujo.add(new Flujo(1, 27.48, new Date(2023, 4, 21)));
-			this.flujo.add(new Flujo(2, 12.50, new Date(2023, 4, 23)));
-			this.flujo.add(new Flujo(3, 3.56, new Date(2023, 4, 26)));
+			this.flujo.add(new Flujo(1, 27.48, LocalDate.parse("2023-04-21")));
+			this.flujo.add(new Flujo(2, 12.50, LocalDate.parse("2023-04-23")));
+			this.flujo.add(new Flujo(3, 3.56, LocalDate.parse("2023-04-26")));
 		}
 		return this.flujo;
 	}

@@ -1,21 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Listar Movimientos</title>
+<title>Estado de Cuenta</title>
 </head>
 <body>
 	<h1>Movimientos</h1>
 	<a href="GestionarCuentaController">Regresar</a>
-	<h3>Ingresa el rango de fechas</h3>
-	<form action="GestionarMovimientoController?ruta=mostrarEstado" method="post">
-		Fecha Inicio<input type="date" name="fechaInicio" required/> <br> Fecha
-		Fin<input type="date" name="fechaFin" required/>
-		<input type="submit" value="consultar" />
-	</form>
 	<table>
 		<thead>
 			<tr>

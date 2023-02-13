@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,8 +57,23 @@ public class GestionarMovimientoController extends HttpServlet {
 		case "guardarMovimiento":
 			this.guardarMovimiento(request, response);
 			break;
+		case "mostrarEstado":
+			this.mostrarEstado(request, response);
+			break;
 		}
 	}
+
+	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String fechaInicio = request.getParameter("fechaInicio");
+		String fechaFin = request.getParameter("fechaInicio");
+		System.out.println(fechaInicio);
+		Movimiento modeloMovimiento = new Movimiento();
+		List<Movimiento> rangoMovimientos = modeloMovimiento.rangoFechas(fechaInicio, fechaFin);
+		
+		request.setAttribute("movimientos", rangoMovimientos);
+		request.getRequestDispatcher("/jsp/mostrarestado.jsp").forward(request, response);
+	}
+
 
 	private void listarMovimientos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Movimiento modeloMovimiento = new Movimiento();
@@ -76,7 +92,7 @@ public class GestionarMovimientoController extends HttpServlet {
 		
 		double monto = Double.parseDouble(request.getParameter("txtMonto"));
 		String concepto = request.getParameter("txtConcepto");
-		Date fecha = new Date();
+		LocalDate fecha = LocalDate.now();
 		
 		Cuenta cuentaOrigen;
 		Cuenta cuentaDestino;
