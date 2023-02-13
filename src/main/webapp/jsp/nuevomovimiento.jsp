@@ -13,9 +13,9 @@
 		<input type="radio" id="BalanceOrigen" name="tipoCuentaOrigen" value="0"
 			onclick="llenar1(0);" required> 
 			<label for="BalanceOrigen">Balance</label><br>
-		<input type="radio" id="IngresoEgresoOrigen" name="tipoCuentaOrigen" value="1"
+		<input type="radio" id="IngresoOrigen" name="tipoCuentaOrigen" value="1"
 			onclick="llenar2(0);" required>
-			 <label for="IngresoEgresoOrigen">Ingreso o Egreso</label><br> 
+			 <label for="IngresoOrigen">Ingreso o Egreso</label><br> 
 			 <label for="cuentaOrigen">Cuenta origen</label>
 			 <select name="cuentaOrigen" id="cuentaOrigen">
 
@@ -23,9 +23,9 @@
 		<input type="radio" id="BalanceDestino" name="tipoCuentaDestino" value="0"
 			onclick="llenar1(1);" required> 
 			<label for="BalanceDestino">Balance</label><br>
-		<input type="radio" id="IngresoEgresoDestino" name="tipoCuentaDestino" value="1"
+		<input type="radio" id="EgresoDestino" name="tipoCuentaDestino" value="1"
 			onclick="llenar2(1);" required>
-			<label for="IngresoEgresoDestino">Ingreso o Egreso</label><br> 
+			<label for="EgresoDestino">Ingreso o Egreso</label><br> 
 			 <label for="cuentaDestino">Cuenta Destino</label>
 		<select	name="cuentaDestino" id="cuentaDestino"></select><br> 
 		Agregar Monto<input type="text" name="txtMonto"><br>
@@ -53,13 +53,13 @@
 	}
 	function llenar2(tipo) {
 		if(tipo == 0){
-			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
+			var html = '<c:forEach items="${cuentasIngreso }" var="cuenta">';
 			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaOrigen").innerHTML = html;
 		}
 		if(tipo == 1){
-			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
+			var html = '<c:forEach items="${cuentasEgreso }" var="cuenta">';
 			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaDestino").innerHTML = html;

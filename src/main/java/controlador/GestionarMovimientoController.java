@@ -73,15 +73,28 @@ public class GestionarMovimientoController extends HttpServlet {
 		
 		double monto = Double.parseDouble(request.getParameter("txtMonto"));
 		String concepto = request.getParameter("txtConcepto");
-		Calendar calendar = Calendar.getInstance();
-		calendar.toString();
-		System.out.println(calendar.toString());
+		Date fecha = new Date();
+		
+		if(tipoCuentaOrigen == 0) {
+			Balance modeloCuenta = new Balance();
+			modeloCuenta.buscar(idCuentaOrigen).restarMonto(monto);
+			if(tipoCuentaDestino == 0) {
+				modeloCuenta.buscar(idCuentaDestino).sumarMonto(monto);
+			}else {
+				
+			}
+		}else {
+			Balance modeloCuenta = new Balance();
+			modeloCuenta.buscar(idCuentaDestino).restarMonto(monto);
+		}
 	}
 
 	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IngresoEgreso modeloCuenta = new IngresoEgreso();
-		List<IngresoEgreso> cuentasIngresoEgreso = modeloCuenta.getCuentas();
-		request.setAttribute("cuentasIngresoEgreso", cuentasIngresoEgreso);
+		List<IngresoEgreso> cuentasIngreso = modeloCuenta.getCuentasIngreso();
+		List<IngresoEgreso> cuentasEgreso = modeloCuenta.getCuentasEgreso();
+		request.setAttribute("cuentasIngreso", cuentasIngreso);
+		request.setAttribute("cuentasEgreso", cuentasEgreso);
 
 		Balance modeloCuentaBalance = new Balance();
 		List<Balance> cuentasBalance = modeloCuentaBalance.getCuentas();

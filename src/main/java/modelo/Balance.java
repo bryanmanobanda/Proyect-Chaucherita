@@ -27,6 +27,13 @@ public class Balance extends Cuenta implements Serializable{
 	public void setMonto(double monto) {
 		this.monto = monto;
 	}
+	
+	public void sumarMonto(double deposito) {
+		this.monto+=deposito;
+	}
+	public void restarMonto(double retiro) {
+		this.monto-=retiro;
+	}
 
 	public void crearCuenta(Balance cuenta) {
 		int max = 0;
