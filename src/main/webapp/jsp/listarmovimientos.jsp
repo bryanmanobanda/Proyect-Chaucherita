@@ -20,7 +20,7 @@
 				<th>Fecha</th>
 				<th>Valor</th>
 			</tr>
-			<c:forEach items="${movimientos }" var="movimiento">
+			<c:forEach items="${movimientos}" var="movimiento">
 				<tr>
 					<td>${movimiento.id}</td>
 					<td>${movimiento.cuentaOrigen.nombre}</td>
@@ -32,6 +32,5 @@
 			</c:forEach>
 		</thead>
 	</table>
-	
 </body>
 </html>
