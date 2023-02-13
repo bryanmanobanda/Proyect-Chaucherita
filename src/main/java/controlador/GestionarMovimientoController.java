@@ -97,6 +97,8 @@ public class GestionarMovimientoController extends HttpServlet {
 		}else {
 			IngresoEgreso modeloIngreso = new IngresoEgreso();
 			cuentaOrigen = modeloIngreso.buscar(idCuentaOrigen);
+			Flujo flujo = new Flujo(0, monto, fecha);
+			modeloIngreso.buscar(idCuentaOrigen).agregarFlujo(flujo);
 			
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.buscar(idCuentaDestino).sumarMonto(monto);
