@@ -24,6 +24,7 @@ public class GestionarMovimientoController extends HttpServlet {
 	public GestionarMovimientoController() {
 		super();
 	}
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
