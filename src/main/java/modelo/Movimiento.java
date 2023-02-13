@@ -100,7 +100,7 @@ public class Movimiento implements Serializable{
 		return movimientos;
 	}
 	
-	public void crearCuenta(Movimiento movimiento) {
+	public void crearMovimiento(Movimiento movimiento) {
 		int max = 0;
 		for (Movimiento c : movimientos) {
 			if(max < c.getId()) {

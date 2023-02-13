@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Balance;
+import modelo.Cuenta;
+import modelo.Flujo;
 import modelo.IngresoEgreso;
 import modelo.Movimiento;
 
@@ -75,18 +77,33 @@ public class GestionarMovimientoController extends HttpServlet {
 		String concepto = request.getParameter("txtConcepto");
 		Date fecha = new Date();
 		
+		Cuenta cuentaOrigen;
+		Cuenta cuentaDestino;
+		
 		if(tipoCuentaOrigen == 0) {
 			Balance modeloCuenta = new Balance();
 			modeloCuenta.buscar(idCuentaOrigen).restarMonto(monto);
+			cuentaOrigen = modeloCuenta.buscar(idCuentaOrigen);
 			if(tipoCuentaDestino == 0) {
 				modeloCuenta.buscar(idCuentaDestino).sumarMonto(monto);
+				cuentaDestino = modeloCuenta.buscar(idCuentaDestino);
 			}else {
-				
+				IngresoEgreso modeloEgreso = new IngresoEgreso();
+				Flujo flujo = new Flujo(0, monto, fecha);
+				modeloEgreso.buscar(idCuentaDestino).agregarFlujo(flujo);
+				cuentaDestino = modeloEgreso.buscar(idCuentaDestino);
 			}
 		}else {
+			IngresoEgreso modeloIngreso = new IngresoEgreso();
+			cuentaOrigen = modeloIngreso.buscar(idCuentaOrigen);
+			
 			Balance modeloCuenta = new Balance();
-			modeloCuenta.buscar(idCuentaDestino).restarMonto(monto);
+			modeloCuenta.buscar(idCuentaDestino).sumarMonto(monto);
+			cuentaDestino = modeloCuenta.buscar(idCuentaDestino);
 		}
+		Movimiento modeloMovimiento = new Movimiento();
+		Movimiento movimiento = new Movimiento(0, cuentaOrigen, cuentaDestino, concepto, fecha, monto);
+		modeloMovimiento.crearMovimiento(movimiento);
 	}
 
 	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
