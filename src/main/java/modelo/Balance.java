@@ -83,6 +83,9 @@ public class Balance extends Cuenta implements Serializable{
 		return null;
 	}
 	
+	public boolean verificarMonto(double montoARetirar ) {
+		return montoARetirar <= this.monto; 
+	}
 	
 	@Override
 	public int hashCode() {
