@@ -9,7 +9,7 @@ import java.util.Objects;
 public class IngresoEgreso extends Cuenta implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	// true -> Cuenta ded Ingresos, false -> Cuenta de Gastos
+	// true -> Cuenta de Ingresos, false -> Cuenta de Gastos
 	private boolean tipoCuenta;
 
 	private List<Flujo> flujo = null;
@@ -31,6 +31,10 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 	public void setTipoCuenta(boolean tipoCuenta) {
 		this.tipoCuenta = tipoCuenta;
 	}
+	
+	public boolean getTipoCuenta() {
+		return this.tipoCuenta;
+	}
 
 	public List<IngresoEgreso> getCuentas() {
 		if(cuentas == null) {
@@ -40,6 +44,28 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 			cuentas.add(new IngresoEgreso(false, 2, "Regalos", "Gastando plata"));
 		}
 		return cuentas;
+	}
+	
+	public List<IngresoEgreso> getCuentasIngreso(){
+		List<IngresoEgreso> listaGeneral =  this.getCuentas();
+		List<IngresoEgreso> cuentasIngreso = new ArrayList<IngresoEgreso>();
+		for(IngresoEgreso cuenta: listaGeneral) {
+			if(cuenta.getTipoCuenta()) {
+				cuentasIngreso.add(cuenta);
+			}
+		}
+		return cuentasIngreso;
+	}
+	
+	public List<IngresoEgreso> getCuentasEgreso(){
+		List<IngresoEgreso> listaGeneral =  this.getCuentas();
+		List<IngresoEgreso> cuentasEgreso = new ArrayList<IngresoEgreso>();
+		for(IngresoEgreso cuenta: listaGeneral) {
+			if(!cuenta.getTipoCuenta()) {
+				cuentasEgreso.add(cuenta);
+			}
+		}
+		return cuentasEgreso;
 	}
 	
 	public void agregarFlujo(Flujo flujo) {
@@ -96,6 +122,8 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 		}
 		return null;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
