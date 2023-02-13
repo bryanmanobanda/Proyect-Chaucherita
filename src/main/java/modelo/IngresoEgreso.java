@@ -69,9 +69,16 @@ public class IngresoEgreso extends Cuenta implements Serializable {
 	}
 	
 	public void agregarFlujo(Flujo flujo) {
+		int max = 0;
 		if (this.flujo == null) {
 			this.flujo = new ArrayList<Flujo>();
 		}
+		for(Flujo f: this.flujo) {
+			if(max < f.getId()) {
+				max = f.getId();
+			}
+		}
+		flujo.setId(max + 1);
 		this.flujo.add(flujo);
 	}
 
