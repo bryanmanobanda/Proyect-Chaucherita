@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>Movimientos</h1>
+	<a href="GestionarCuentaController">Regresar</a>
 	<table>
 		<thead>
 			<tr>
