@@ -114,12 +114,14 @@ public class Movimiento implements Serializable {
 		LocalDate fechaFin = LocalDate.parse(fechaFn);
 		for (Movimiento m : movimientos) {
 			LocalDate fecha = LocalDate.parse(m.getFecha().toString());
-			if ((fecha.isBefore(fechaFin) || fecha.equals(fechaFin))
-					&& (fecha.isAfter(fechaInicio) || fecha.equals(fechaInicio))) {
+
+			if ((fecha.isBefore(fechaFin) || fecha.isEqual(fechaFin))
+					&& (fecha.isAfter(fechaInicio) || fecha.isEqual(fechaInicio))) {
 				movimientosEnRango.add(m);
 			}
+			
 		}
-		System.out.println(movimientos.toString());
+		System.out.println(movimientosEnRango.toString());
 		return movimientosEnRango;
 	}
 

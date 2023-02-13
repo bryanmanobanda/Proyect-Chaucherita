@@ -65,7 +65,7 @@ public class GestionarMovimientoController extends HttpServlet {
 
 	private void mostrarEstado(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String fechaInicio = request.getParameter("fechaInicio");
-		String fechaFin = request.getParameter("fechaInicio");
+		String fechaFin = request.getParameter("fechaFin");
 		System.out.println(fechaInicio);
 		Movimiento modeloMovimiento = new Movimiento();
 		List<Movimiento> rangoMovimientos = modeloMovimiento.rangoFechas(fechaInicio, fechaFin);
