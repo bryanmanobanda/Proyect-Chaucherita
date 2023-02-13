@@ -11,20 +11,20 @@
 	<h1>Traspasar dinero entre cuentas</h1>
 	<form action="GestionarMovimientoController?ruta=guardarMovimiento" method="post">
 		<input type="radio" id="BalanceOrigen" name="tipoCuentaOrigen" value="0"
-			onclick="llenar1(0);" required> 
+			onclick="llenarCuentasBalance(0);habilitarEgreso();" required> 
 			<label for="BalanceOrigen">Balance</label><br>
 		<input type="radio" id="IngresoOrigen" name="tipoCuentaOrigen" value="1"
-			onclick="llenar2(0);" required>
+			onclick="llenarCuentasIngresoEgreso(0);deshabilitarEgreso();" required>
 			 <label for="IngresoOrigen">Ingreso</label><br> 
 			 <label for="cuentaOrigen">Cuenta origen</label>
 			 <select name="cuentaOrigen" id="cuentaOrigen">
 
 		</select><br> 
 		<input type="radio" id="BalanceDestino" name="tipoCuentaDestino" value="0"
-			onclick="llenar1(1);" required> 
+			onclick="llenarCuentasBalance(1);" required> 
 			<label for="BalanceDestino">Balance</label><br>
 		<input type="radio" id="EgresoDestino" name="tipoCuentaDestino" value="1"
-			onclick="llenar2(1);" required>
+			onclick="llenarCuentasIngresoEgreso(1);" required>
 			<label for="EgresoDestino">Egreso</label><br> 
 			 <label for="cuentaDestino">Cuenta Destino</label>
 		<select	name="cuentaDestino" id="cuentaDestino"></select><br> 
@@ -36,7 +36,7 @@
 
 </body>
 <script>
-	function llenar1(tipo) {
+	function llenarCuentasBalance(tipo) {
 		if(tipo == 0){
 			var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
 			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
@@ -51,7 +51,7 @@
 		}
 		
 	}
-	function llenar2(tipo) {
+	function llenarCuentasIngresoEgreso(tipo) {
 		if(tipo == 0){
 			var html = '<c:forEach items="${cuentasIngreso }" var="cuenta">';
 			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
@@ -64,7 +64,12 @@
 			html += '</c:forEach>';
 			document.getElementById("cuentaDestino").innerHTML = html;
 		}
-		
+	}
+	function deshabilitarEgreso(){
+		document.getElementById("EgresoDestino").setAttribute('disabled','');
+	}
+	function habilitarEgreso(){
+		document.getElementById("EgresoDestino").removeAttribute('disabled');
 	}
 </script>
 </html>
