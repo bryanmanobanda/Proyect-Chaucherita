@@ -27,9 +27,9 @@
 			onclick="llenar2(1);" required>
 			<label for="IngresoEgresoDestino">Ingreso o Egreso</label><br> 
 			 <label for="cuentaDestino">Cuenta Destino</label>
-		<select	name="cuentaDestino" id="cuentaDestino">
-			
-		</select><br> <label for="monto">Agregar Monto</label> <input type="text">
+		<select	name="cuentaDestino" id="cuentaDestino"></select><br> 
+		Agregar Monto<input type="text" name="txtMonto"><br>
+		Ingresar concepto<input type="text" name="txtConcepto"><br>
 		<input type="submit" value="Realizar Movimiento" />
 	</form>
 
@@ -39,13 +39,13 @@
 	function llenar1(tipo) {
 		if(tipo == 0){
 			var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
-			html += '<option>${cuenta.nombre}</option>';
+			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaOrigen").innerHTML = html;
 		}
 		if(tipo == 1){
 			var html = '<c:forEach items="${cuentasBalance }" var="cuenta">';
-			html += '<option>${cuenta.nombre}</option>';
+			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaDestino").innerHTML = html;
 		}
@@ -54,13 +54,13 @@
 	function llenar2(tipo) {
 		if(tipo == 0){
 			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
-			html += '<option>${cuenta.nombre}</option>';
+			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaOrigen").innerHTML = html;
 		}
 		if(tipo == 1){
 			var html = '<c:forEach items="${cuentasIngresoEgreso }" var="cuenta">';
-			html += '<option>${cuenta.nombre}</option>';
+			html += '<option>${cuenta.id}-${cuenta.nombre}</option>';
 			html += '</c:forEach>';
 			document.getElementById("cuentaDestino").innerHTML = html;
 		}

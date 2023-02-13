@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -63,7 +65,17 @@ public class GestionarMovimientoController extends HttpServlet {
 	}
 
 	private void guardarMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int tipoCuentaOrigen = Integer.parseInt(request.getParameter("tipoCuentaOrigen"));
+		int tipoCuentaDestino = Integer.parseInt(request.getParameter("tipoCuentaDestino"));
 		
+		int idCuentaOrigen = Integer.parseInt(request.getParameter("cuentaOrigen").split("-")[0]);
+		int idCuentaDestino = Integer.parseInt(request.getParameter("cuentaDestino").split("-")[0]);
+		
+		double monto = Double.parseDouble(request.getParameter("txtMonto"));
+		String concepto = request.getParameter("txtConcepto");
+		Calendar calendar = Calendar.getInstance();
+		calendar.toString();
+		System.out.println(calendar.toString());
 	}
 
 	private void nuevoMovimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
